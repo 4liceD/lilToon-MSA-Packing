@@ -899,7 +899,7 @@
             // AO Map & Toon
             #if defined(LIL_FEATURE_ShadowBorderMask)
                 #if defined(_ShadowBorderMaskLOD)
-                    float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain);
+                    float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain).b;
                     if(_ShadowBorderMaskLOD) shadowBorderMask = LIL_SAMPLE_2D_GRAD(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain, max(fd.ddxMain, _ShadowBorderMaskLOD), max(fd.ddyMain, _ShadowBorderMaskLOD));
                 #else
                     float4 shadowBorderMask = LIL_SAMPLE_2D_GRAD(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain, max(fd.ddxMain, _ShadowBorderMaskLOD), max(fd.ddyMain, _ShadowBorderMaskLOD));
@@ -909,7 +909,7 @@
                 #if defined(LIL_FEATURE_SHADOW_3RD)
                     shadowBorderMask.b = saturate(shadowBorderMask.b * _ShadowAOShift2.x + _ShadowAOShift2.y);
                 #endif
-                lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.rgb;
+                lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.b;
 
                 lns.w = lns.x;
                 lns.x = lilTooningNoSaturateScale(_AAStrength, lns.x, _ShadowBorder, shadowBlur);
@@ -1305,7 +1305,7 @@
             #if !defined(LIL_REFRACTION_BLUR2) || defined(LIL_PASS_FORWARDADD)
                 fd.smoothness = _Smoothness;
                 #if defined(LIL_FEATURE_SmoothnessTex)
-                    fd.smoothness *= LIL_SAMPLE_2D_ST(_SmoothnessTex, samp, fd.uvMain).r;
+                    fd.smoothness *= LIL_SAMPLE_2D_ST(_SmoothnessTex, samp, fd.uvMain).g;
                 #endif
                 GSAAForSmoothness(fd.smoothness, fd.N, _GSAAStrength);
                 fd.perceptualRoughness = fd.perceptualRoughness - fd.smoothness * fd.perceptualRoughness;
