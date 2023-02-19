@@ -219,7 +219,7 @@
         // Reflection
         fd.smoothness = _Smoothness;
         #if defined(LIL_FEATURE_SmoothnessTex)
-            fd.smoothness *= LIL_SAMPLE_2D(_SmoothnessTex, sampler_MainTex, fd.uvMain).r;
+            fd.smoothness *= LIL_SAMPLE_2D(_SmoothnessTex, sampler_MainTex, fd.uvMain).g;
         #endif
         fd.perceptualRoughness = fd.perceptualRoughness - fd.smoothness * fd.perceptualRoughness;
         fd.roughness = fd.perceptualRoughness * fd.perceptualRoughness;
