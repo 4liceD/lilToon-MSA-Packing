@@ -17,6 +17,9 @@ Blue | Occlusion
 
 Note: only tested in builtin render pipeline.
 
+![image](https://user-images.githubusercontent.com/95102992/220165320-4f450e66-e77c-4bba-96e8-f30ad129d98f.png)
+
+
 ## English
 Drag and drop unitypackage to the Unity window, or import `https://github.com/lilxyzw/lilToon.git?path=Assets/lilToon#master` from UPM.  
 [Download](https://github.com/lilxyzw/lilToon/releases) / [Documentation](https://lilxyzw.github.io/lilToon/index.html#/en-us/) / [How to distribute your works that use lilToon](https://lilxyzw.github.io/lilToon/#/en-us/first?id=how-to-distribute-your-works-that-use-liltoon)
