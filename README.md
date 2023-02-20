@@ -1,7 +1,7 @@
 Modified version to support MSA PBR Packing to optimise vram usage if you use liltoon with pbr.
-Simply drag your MSA Texture into your AO Map, Metallic and Smoothness slots depending on which features you want to use.
+Simply assign your MSA Texture into your AO Map, Metallic and Smoothness slots depending on which features you want to use.
 Ensure to disable "sRGB (Color Texture)" on the import settings of your MSA Texture.
-If you don't want to use packing, just drag in your regular pbr textures like always.
+If you don't want to use packing, just assign your regular pbr textures like always.
 <html>
 <body>
 <!--StartFragment-->
