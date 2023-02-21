@@ -278,6 +278,7 @@ namespace lilToon
         protected static GUIContent shadow1stColorRGBAContent       { get { return lilLanguageManager.shadow1stColorRGBAContent     ; } private set { lilLanguageManager.shadow1stColorRGBAContent      = value; } }
         protected static GUIContent shadow2ndColorRGBAContent       { get { return lilLanguageManager.shadow2ndColorRGBAContent     ; } private set { lilLanguageManager.shadow2ndColorRGBAContent      = value; } }
         protected static GUIContent shadow3rdColorRGBAContent       { get { return lilLanguageManager.shadow3rdColorRGBAContent     ; } private set { lilLanguageManager.shadow3rdColorRGBAContent      = value; } }
+        protected static string sPackingModes                       { get { return lilLanguageManager.sPackingModes                 ; } private set { lilLanguageManager.sPackingModes                  = value; } }
         #endregion
 
         //------------------------------------------------------------------------------------------------------------------------------
@@ -493,6 +494,7 @@ namespace lilToon
         private readonly lilMaterialProperty backlightBackfaceMask      = new lilMaterialProperty("_BacklightBackfaceMask", PropertyBlock.Backlight);
 
         private readonly lilMaterialProperty useReflection                  = new lilMaterialProperty("_UseReflection", PropertyBlock.Reflection);
+        private readonly lilMaterialProperty packing                        = new lilMaterialProperty("_Packing", PropertyBlock.Reflection);
         private readonly lilMaterialProperty metallic                       = new lilMaterialProperty("_Metallic", PropertyBlock.Reflection, PropertyBlock.Gem);
         private readonly lilMaterialProperty metallicGlossMap               = new lilMaterialProperty("_MetallicGlossMap", true, PropertyBlock.Reflection, PropertyBlock.Gem);
         private readonly lilMaterialProperty smoothness                     = new lilMaterialProperty("_Smoothness", PropertyBlock.Reflection);
@@ -1063,6 +1065,7 @@ namespace lilToon
                 backlightBackfaceMask,
 
                 useReflection,
+                packing,
                 metallic,
                 metallicGlossMap,
                 smoothness,
@@ -2604,6 +2607,7 @@ namespace lilToon
                         if(useReflection.floatValue == 1)
                         {
                             EditorGUILayout.BeginVertical(boxInnerHalf);
+                            m_MaterialEditor.ShaderProperty(packing, sPackingModes);
                             TextureGUI(ref edSet.isShowSmoothnessTex, smoothnessContent, smoothnessTex, smoothness);
                             m_MaterialEditor.ShaderProperty(gsaaStrength, "GSAA", 1);
                             lilEditorGUI.DrawLine();

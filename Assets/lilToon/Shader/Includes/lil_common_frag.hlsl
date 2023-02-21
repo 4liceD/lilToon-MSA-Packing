@@ -130,6 +130,7 @@
     #define BEFORE_OUTPUT
 #endif
 
+
 //------------------------------------------------------------------------------------------------------------------------------
 // Override
 
@@ -898,18 +899,42 @@
 
             // AO Map & Toon
             #if defined(LIL_FEATURE_ShadowBorderMask)
-                #if defined(_ShadowBorderMaskLOD)
-                    float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain).b;
+                #if defined(_ShadowBorderMaskLOD) && !defined(LIL_FEATURE_REFLECTION)
+                    float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain);
                     if(_ShadowBorderMaskLOD) shadowBorderMask = LIL_SAMPLE_2D_GRAD(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain, max(fd.ddxMain, _ShadowBorderMaskLOD), max(fd.ddyMain, _ShadowBorderMaskLOD));
                 #else
                     float4 shadowBorderMask = LIL_SAMPLE_2D_GRAD(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain, max(fd.ddxMain, _ShadowBorderMaskLOD), max(fd.ddyMain, _ShadowBorderMaskLOD));
+                #endif
+                #if defined(_ShadowBorderMaskLOD) && defined(LIL_FEATURE_REFLECTION)
+                    if (_Packing == 0) { 
+                        float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain); 
+                    }
+                    if (_Packing == 1) {
+                        float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain).b;
+                    }
+                    if (_Packing == 2) {
+                        float4 shadowBorderMask = LIL_SAMPLE_2D(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain)g;
+                    }
+                    if (_ShadowBorderMaskLOD) shadowBorderMask = LIL_SAMPLE_2D_GRAD(_ShadowBorderMask, lil_sampler_linear_repeat, fd.uvMain, max(fd.ddxMain, _ShadowBorderMaskLOD), max(fd.ddyMain, _ShadowBorderMaskLOD));
                 #endif
                 shadowBorderMask.r = saturate(shadowBorderMask.r * _ShadowAOShift.x + _ShadowAOShift.y);
                 shadowBorderMask.g = saturate(shadowBorderMask.g * _ShadowAOShift.z + _ShadowAOShift.w);
                 #if defined(LIL_FEATURE_SHADOW_3RD)
                     shadowBorderMask.b = saturate(shadowBorderMask.b * _ShadowAOShift2.x + _ShadowAOShift2.y);
                 #endif
-                lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.b;
+                #if defined(LIL_FEATURE_REFLECTION)
+                    if (_Packing == 0){ 
+                        lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.rgb; 
+                    }
+                    if (_Packing == 1){ 
+                        lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.b; 
+                    }
+                    if (_Packing == 2) {
+                        lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.g;
+                    }
+                #else
+                lns.xyz = _ShadowPostAO ? lns.xyz : lns.xyz * shadowBorderMask.rgb;
+                #endif
 
                 lns.w = lns.x;
                 lns.x = lilTooningNoSaturateScale(_AAStrength, lns.x, _ShadowBorder, shadowBlur);
@@ -1304,8 +1329,16 @@
             // Smoothness
             #if !defined(LIL_REFRACTION_BLUR2) || defined(LIL_PASS_FORWARDADD)
                 fd.smoothness = _Smoothness;
-                #if defined(LIL_FEATURE_SmoothnessTex)
+                #if defined(LIL_FEATURE_SmoothnessTex)                
+                if (_Packing == 0) {
+                    fd.smoothness *= LIL_SAMPLE_2D_ST(_SmoothnessTex, samp, fd.uvMain).r;
+                }
+                if (_Packing == 1) {
                     fd.smoothness *= LIL_SAMPLE_2D_ST(_SmoothnessTex, samp, fd.uvMain).g;
+                }
+                if (_Packing == 2) {
+                    fd.smoothness *= LIL_SAMPLE_2D_ST(_SmoothnessTex, samp, fd.uvMain).a;
+                }
                 #endif
                 GSAAForSmoothness(fd.smoothness, fd.N, _GSAAStrength);
                 fd.perceptualRoughness = fd.perceptualRoughness - fd.smoothness * fd.perceptualRoughness;

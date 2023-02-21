@@ -30,6 +30,7 @@ namespace lilToon
         public static string[] sRenderingModeListLite;
         public static string[] sTransparentModeList;
         public static string[] sBlendModeList;
+        public static string sPackingModes;
         public static GUIContent mainColorRGBAContent;
         public static GUIContent colorRGBAContent;
         public static GUIContent colorAlphaRGBAContent;
@@ -184,6 +185,7 @@ namespace lilToon
             shadow1stColorRGBAContent       = new GUIContent(GetLoc("sShadow1stColor"),                     GetLoc("sTextureRGBA"));
             shadow2ndColorRGBAContent       = new GUIContent(GetLoc("sShadow2ndColor"),                     GetLoc("sTextureRGBA"));
             shadow3rdColorRGBAContent       = new GUIContent(GetLoc("sShadow3rdColor"),                     GetLoc("sTextureRGBA"));
+            sPackingModes                   = BuildParams(GetLoc("Packing Mode"), GetLoc("Off"), GetLoc("MSA"), GetLoc("MOES"));
         }
     }
 }

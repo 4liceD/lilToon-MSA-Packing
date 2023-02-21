@@ -457,6 +457,7 @@ CBUFFER_START(UnityPerMaterial)
         float   _SpecularBlur;
         float   _ReflectionNormalStrength;
         float   _ReflectionCubeEnableLighting;
+        int     _Packing;
     #endif
     #if defined(LIL_MULTI_INPUTS_REFLECTION) || defined(LIL_GEM) || defined(LIL_REFRACTION_BLUR2)
         float   _Smoothness;

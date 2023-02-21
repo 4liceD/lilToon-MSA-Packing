@@ -176,6 +176,7 @@ namespace lilToon
         {
             bool res = false;
             res = res || name == "_UseReflection";
+            res = res || name == "_Packing";
             res = res || name == "_Smoothness";
             res = res || name == "_SmoothnessTex";
             res = res || name == "_Metallic";

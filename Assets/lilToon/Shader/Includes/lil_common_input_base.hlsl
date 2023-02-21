@@ -373,6 +373,7 @@ float   _AAStrength;
 #if defined(LIL_FEATURE_REFLECTION)
     float   _Metallic;
     float   _GSAAStrength;
+    int    _Packing;
 #endif
 #if defined(LIL_FEATURE_MATCAP)
     float   _MatCapBlend;
