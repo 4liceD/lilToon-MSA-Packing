@@ -78,6 +78,7 @@ public class lilToonSetting : ScriptableObject
     public bool LIL_FEATURE_BacklightColorTex = true;
     public bool LIL_FEATURE_SmoothnessTex = true;
     public bool LIL_FEATURE_MetallicGlossMap = true;
+    public bool LIL_FEATURE_Packing = true;
     public bool LIL_FEATURE_ReflectionColorTex = true;
     public bool LIL_FEATURE_ReflectionCubeTex = true;
     public bool LIL_FEATURE_MatCapTex = true;

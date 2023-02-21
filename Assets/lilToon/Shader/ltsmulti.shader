@@ -191,6 +191,8 @@ Shader "_lil/lilToonMulti"
         //----------------------------------------------------------------------------------------------------------------------
         // Reflection
         [lilToggleLeft] _UseReflection              ("Use Reflection", Int) = 0
+        [lilEnum]       _Packing                    ("PBR Packing|Off|MSA|MOES", Int) = 0
+
         // Smoothness
                         _Smoothness                 ("Smoothness", Range(0, 1)) = 1
         [NoScaleOffset] _SmoothnessTex              ("Smoothness", 2D) = "white" {}
@@ -761,6 +763,7 @@ Shader "_lil/lilToonMulti"
             #pragma shader_feature_local _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature_local GEOM_TYPE_MESH
             #pragma shader_feature_local _METALLICGLOSSMAP
+            #pragma shader_feature_local _Packing
             #pragma shader_feature_local GEOM_TYPE_LEAF
             #pragma shader_feature_local _SPECGLOSSMAP
             #pragma shader_feature_local _PARALLAXMAP

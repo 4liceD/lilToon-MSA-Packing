@@ -191,6 +191,8 @@ Shader "Hidden/lilToonTessellationTransparent"
         //----------------------------------------------------------------------------------------------------------------------
         // Reflection
         [lilToggleLeft] _UseReflection              ("Use Reflection", Int) = 0
+        [lilEnum]       _Packing                    ("PBR Packing|Off|MSA|MOES", Int) = 0
+
         // Smoothness
                         _Smoothness                 ("Smoothness", Range(0, 1)) = 1
         [NoScaleOffset] _SmoothnessTex              ("Smoothness", 2D) = "white" {}

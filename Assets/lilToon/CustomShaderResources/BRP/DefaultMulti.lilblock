@@ -180,6 +180,7 @@
             #pragma shader_feature_local _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature_local GEOM_TYPE_MESH
             #pragma shader_feature_local _METALLICGLOSSMAP
+            #pragma shader_feature_local _Packing
             #pragma shader_feature_local GEOM_TYPE_LEAF
             #pragma shader_feature_local _SPECGLOSSMAP
             #pragma shader_feature_local _PARALLAXMAP
