@@ -320,7 +320,8 @@ public class lilToonSetting : ScriptableObject
         shaderSetting.LIL_FEATURE_FurLengthMask = false;
         shaderSetting.LIL_FEATURE_FurVectorTex = false;
         shaderSetting.LIL_OPTIMIZE_USE_VERTEXLIGHT = false;
-        EditorUtility.SetDirty(shaderSetting);
+        shaderSetting.LIL_FEATURE_Packing = false;
+    EditorUtility.SetDirty(shaderSetting);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
@@ -370,8 +371,9 @@ public class lilToonSetting : ScriptableObject
         shaderSetting.LIL_FEATURE_OUTLINE_RECEIVE_SHADOW = true;
         shaderSetting.LIL_FEATURE_FUR_COLLISION = true;
         shaderSetting.LIL_OPTIMIZE_USE_VERTEXLIGHT = true;
+        shaderSetting.LIL_FEATURE_Packing = true;
 
-        if(!lilShaderAPI.IsTextureLimitedAPI())
+        if (!lilShaderAPI.IsTextureLimitedAPI())
         {
             shaderSetting.LIL_FEATURE_MainGradationTex = true;
             shaderSetting.LIL_FEATURE_MainColorAdjustMask = true;
@@ -629,8 +631,8 @@ public class lilToonSetting : ScriptableObject
         if(shaderSetting.LIL_FEATURE_FurMask)                    sb.AppendLine("#define LIL_FEATURE_FurMask");
         if(shaderSetting.LIL_FEATURE_FurLengthMask)              sb.AppendLine("#define LIL_FEATURE_FurLengthMask");
         if(shaderSetting.LIL_FEATURE_FurVectorTex)               sb.AppendLine("#define LIL_FEATURE_FurVectorTex");
-
-        if(shaderSetting.LIL_OPTIMIZE_APPLY_SHADOW_FA) sb.AppendLine("#define LIL_OPTIMIZE_APPLY_SHADOW_FA");
+        if(shaderSetting.LIL_FEATURE_Packing)                    sb.AppendLine("#define LIL_FEATURE_Packing");
+        if(shaderSetting.LIL_OPTIMIZE_APPLY_SHADOW_FA)           sb.AppendLine("#define LIL_OPTIMIZE_APPLY_SHADOW_FA");
         if(shaderSetting.LIL_OPTIMIZE_USE_FORWARDADD) sb.AppendLine("#define LIL_OPTIMIZE_USE_FORWARDADD");
         if(shaderSetting.LIL_OPTIMIZE_USE_FORWARDADD_SHADOW) sb.AppendLine("#define LIL_OPTIMIZE_USE_FORWARDADD_SHADOW");
         if(shaderSetting.LIL_OPTIMIZE_USE_VERTEXLIGHT) sb.AppendLine("#define LIL_OPTIMIZE_USE_VERTEXLIGHT");
@@ -981,6 +983,7 @@ public class lilToonSetting : ScriptableObject
         {
             Debug.Log("[lilToon] LIL_FEATURE_REFLECTION : " + AssetDatabase.GetAssetPath(material));
             shaderSetting.LIL_FEATURE_REFLECTION = true;
+            shaderSetting.LIL_FEATURE_Packing = true;
         }
         if(!shaderSetting.LIL_FEATURE_MATCAP && material.HasProperty("_UseMatCap") && material.GetFloat("_UseMatCap") != 0.0f)
         {

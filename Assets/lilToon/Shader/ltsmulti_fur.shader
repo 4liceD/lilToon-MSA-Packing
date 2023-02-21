@@ -814,7 +814,7 @@ Shader "Hidden/lilToonMultiFur"
             // Build Option
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile_fragment POINT DIRECTIONAL SPOT POINT_COOKIE DIRECTIONAL_COOKIE
+            #pragma multi_compile_fwdadd_fullshadows
             #pragma multi_compile_vertex _ FOG_LINEAR FOG_EXP FOG_EXP2
             #pragma multi_compile_instancing
             #define LIL_PASS_FORWARDADD
@@ -897,7 +897,7 @@ Shader "Hidden/lilToonMultiFur"
             #pragma vertex vert
             #pragma geometry geom
             #pragma fragment frag
-            #pragma multi_compile_fragment POINT DIRECTIONAL SPOT POINT_COOKIE DIRECTIONAL_COOKIE
+            #pragma multi_compile_fwdadd_fullshadows
             #pragma multi_compile_vertex _ FOG_LINEAR FOG_EXP FOG_EXP2
             #pragma multi_compile_instancing
             #define LIL_PASS_FORWARDADD

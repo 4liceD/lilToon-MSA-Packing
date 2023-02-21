@@ -681,6 +681,7 @@ Shader "Hidden/ltspass_tess_cutout"
             #define LIL_FEATURE_FurVectorTex
             #define LIL_OPTIMIZE_APPLY_SHADOW_FA
             #define LIL_OPTIMIZE_USE_FORWARDADD
+            #define LIL_OPTIMIZE_USE_FORWARDADD_SHADOW
             #define LIL_OPTIMIZE_USE_VERTEXLIGHT
             #pragma skip_variants LIGHTMAP_ON DYNAMICLIGHTMAP_ON LIGHTMAP_SHADOW_MIXING SHADOWS_SHADOWMASK DIRLIGHTMAP_COMBINED _MIXED_LIGHTING_SUBTRACTIVE
             #pragma target 5.0
@@ -838,7 +839,7 @@ Shader "Hidden/ltspass_tess_cutout"
             #pragma hull hull
             #pragma domain domain
             #pragma require tesshw tessellation
-            #pragma multi_compile_fragment POINT DIRECTIONAL SPOT POINT_COOKIE DIRECTIONAL_COOKIE
+            #pragma multi_compile_fwdadd_fullshadows
             #pragma multi_compile_domain _ FOG_LINEAR FOG_EXP FOG_EXP2
             #pragma multi_compile_instancing
             #define LIL_PASS_FORWARDADD
@@ -889,7 +890,7 @@ Shader "Hidden/ltspass_tess_cutout"
             #pragma hull hull
             #pragma domain domain
             #pragma require tesshw tessellation
-            #pragma multi_compile_fragment POINT DIRECTIONAL SPOT POINT_COOKIE DIRECTIONAL_COOKIE
+            #pragma multi_compile_fwdadd_fullshadows
             #pragma multi_compile_domain _ FOG_LINEAR FOG_EXP FOG_EXP2
             #pragma multi_compile_instancing
             #define LIL_PASS_FORWARDADD

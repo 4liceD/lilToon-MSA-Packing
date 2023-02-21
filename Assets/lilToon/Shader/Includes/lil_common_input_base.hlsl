@@ -373,7 +373,6 @@ float   _AAStrength;
 #if defined(LIL_FEATURE_REFLECTION)
     float   _Metallic;
     float   _GSAAStrength;
-    int    _Packing;
 #endif
 #if defined(LIL_FEATURE_MATCAP)
     float   _MatCapBlend;
@@ -504,6 +503,7 @@ float   _lilShadowCasterBias;
 //------------------------------------------------------------------------------------------------------------------------------
 // Int
 uint    _Cull;
+uint _Packing;
 #if !defined(LIL_FUR) && !defined(LIL_REFRACTION) && !defined(LIL_GEM)
     uint    _OutlineCull;
 #endif

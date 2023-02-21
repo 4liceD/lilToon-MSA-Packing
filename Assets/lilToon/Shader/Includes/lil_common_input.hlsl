@@ -144,6 +144,7 @@ CBUFFER_START(UnityPerMaterial)
     float   _OutlineFixWidth;
     float   _OutlineZBias;
     uint    _Cull;
+    uint    _Packing;
     uint    _OutlineCull;
     uint    _EmissionMap_UVMode;
     uint    _OutlineVertexR2Width;
